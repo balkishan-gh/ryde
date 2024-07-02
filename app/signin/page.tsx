@@ -66,6 +66,14 @@ const Signin = () => {
 
     try {
       const res = await axios.post("http://localhost:8080/signin", d);
+      if (res.data.isValid === false) {
+        toast.error("We haven't found any account for this email");
+        return;
+      }
+      if (res.data.isMatched === false) {
+        toast.error("You have entered wrong password");
+        return;
+      }
       if (res) {
         toast.success("Signed in successfully"); // TODO: Put it inside a setTimeout function
       } else {

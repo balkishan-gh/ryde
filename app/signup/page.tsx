@@ -68,6 +68,10 @@ const Signup = () => {
 
     try {
       const res = await axios.post("http://localhost:8080/signup", d);
+      if (res.data.isValid === false) {
+        toast.error("Email already exists");
+        return;
+      }
       if (res) {
         toast.success("Signed up successfully"); // TODO: Put in inside a setTimeout function
       } else {
